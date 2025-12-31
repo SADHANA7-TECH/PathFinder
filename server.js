@@ -13,14 +13,13 @@ app.use(express.json());
 
 import fs from "fs";
 
-const serviceAccount = JSON.parse(
-  fs.readFileSync("./serviceAccountKey.json", "utf8")
-);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://pathfinder-backend-2f596-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
+
 
 const db = admin.database();
 
