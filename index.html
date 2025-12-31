@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PathFinder | Career Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ 
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>PathFinder</h1>
+    <p class="subtitle">Discover your career path 🌙</p>
+
+    <form id="questionForm">
+      <div id="questionsContainer"></div>
+
+      <button type="submit" class="submit-btn">
+        See My Career Path →
+      </button>
+    </form>
+  </div>
+
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getDatabase, ref, get, push } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDmp_QBCMEHXumI8xw_dU2_QsAN4Hvv9L8",
+      authDomain: "pathfinder-backend-2f596.firebaseapp.com",
+      databaseURL: "https://pathfinder-backend-2f596-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "pathfinder-backend-2f596",
+      storageBucket: "pathfinder-backend-2f596.appspot.com",
+      messagingSenderId: "48726360082",
+      appId: "1:48726360082:web:9b295a34f808468778d8cb"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const container = document.getElementById("questionsContainer");
+
+    
+    get(ref(db, "questions")).then(snapshot => {
+      if (!snapshot.exists()) return;
+
+      const questions = snapshot.val();
+
+      Object.keys(questions).forEach(key => {
+        const q = questions[key];
+
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.innerHTML = `<h3>${q.text}</h3>`;
+
+        q.options.forEach(opt => {
+          card.innerHTML += `
+            <label>
+              <input type="radio" name="${key}" value="${opt}" required>
+              ${opt}
+            </label>
+          `;
+        });
+
+        container.appendChild(card);
+      });
+    });
+
+    
+    document.getElementById("questionForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const answers = {};
+      new FormData(e.target).forEach((v, k) => answers[k] = v);
+
+      await push(ref(db, "responses"), {
+        answers,
+        timestamp: Date.now()
+      });
+
+      window.location.href = "result.html"; // 🔥 DIRECT REDIRECT
+    });
+  </script>
+</body>
+</html>

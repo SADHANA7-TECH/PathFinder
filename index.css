@@ -1,0 +1,77 @@
+:root {
+  --moon-light: #F5D5E0;
+  --moon-blue:  #6667AB;
+  --moon-violet:#7B337E;
+  --moon-dark:  #420D4B;
+  --moon-black: #210635;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, var(--moon-black), var(--moon-dark));
+  color: var(--moon-light);
+  min-height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+form {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+
+.question-box {
+  background: rgba(255,255,255,0.08);
+  border-left: 5px solid var(--moon-blue);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.question-box p {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: var(--moon-light);
+}
+
+label {
+  display: block;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+
+button {
+  display: block;
+  margin: 40px auto;
+  padding: 14px 40px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--moon-blue), var(--moon-violet));
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
