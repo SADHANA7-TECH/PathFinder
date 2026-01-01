@@ -51,7 +51,8 @@ async function fetchCareerSuggestion() {
   loader.style.display = "block";
 
   try {
-    const res = await fetch("http://localhost:3000/career-suggestion");
+    const res = await fetch("https://pathfinder-oap1.onrender.com/career-suggestion");
+
     const data = await res.json();
 
     loader.style.display = "none";
